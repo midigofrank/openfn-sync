@@ -18,7 +18,7 @@ openfn:
   uuid: 4adf2644-ed4e-4f97-a24c-ab35b3cb1efa
   endpoint: https://e4b0-197-237-71-108.ngrok-free.app
   inserted_at: 2026-09-01T13:09:39Z
-  updated_at: 2026-10-14T06:56:52Z
+  updated_at: 2026-10-15T11:35:39Z
 options:
   allow_support_access: false
   requires_mfa: false
@@ -39,6 +39,7 @@ workflows:
           // retest e3
           // e6b
           // ws test
+          // repro4
         adaptor: '@openfn/language-http@latest'
         openfn:
           uuid: fa62d642-bfc7-4f3a-b7c2-d54c6dba7e95
@@ -97,11 +98,11 @@ workflows:
     history:
       - app:9d02168a212e
       - app:c0c71ae45ce6
-      - cli:39447616b037
+      - cli:cf4068b53bac
     openfn:
       uuid: 6ce1b0b3-ad4e-4842-bab8-028b81660c53
       inserted_at: 2026-09-01T13:09:39Z
-      updated_at: 2026-10-14T06:56:52Z
-      lock_version: 24
+      updated_at: 2026-10-15T11:35:40Z
+      lock_version: 25
     id: openhie-workflow
     start: webhook
