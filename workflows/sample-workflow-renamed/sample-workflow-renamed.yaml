@@ -1,5 +1,5 @@
-id: sample-workflow
-name: Sample Workflow
+id: sample-workflow-renamed
+name: Sample Workflow (renamed)
 start: webhook
 steps:
   - id: job-1-check-if-age-is-over-18-months

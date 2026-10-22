@@ -1,14 +1,6 @@
 id: frank-demo
 name: frank-demo
 schema_version: '4.0'
-cli:
-  forked_from:
-    event-based-workflow: cli:425db74cfa89
-    fetch-google-sheet-data: cli:abaa91539a0a
-    sample-workflow: cli:c97e76bc9437
-    scheduled-workflow: cli:2c0b602dca75
-    openhie-workflow: cli:c0c71ae45ce6
-    sync-test: cli:362bebdb9c9b
 collections: []
 channels:
   - enabled: true
@@ -26,117 +18,13 @@ openfn:
   uuid: 8f7bca29-8a96-423b-854d-5d036d48588e
   endpoint: https://e4b0-197-237-71-108.ngrok-free.app
   inserted_at: 2026-10-06T08:05:11Z
-  updated_at: 2026-10-14T15:05:30Z
+  updated_at: 2026-10-14T17:10:49Z
 options:
   allow_support_access: false
   requires_mfa: false
   retention_policy: retain_all
 workflows:
-  - name: Event-based workflow
-    steps:
-      - id: http
-        name: Http
-        expression: |-
-          // Check out the Job Writing Guide for help getting started:
-          // https://docs.openfn.org/documentation/jobs/job-writing-
-
-          fn(state => {
-            console.log("is this logged?");
-            b = a * 10;
-            return state.data.x * 4;
-            });
-        adaptor: '@openfn/language-http@7.3.1'
-        openfn:
-          uuid: 419001ff-a02b-47ce-a38e-29129d12035d
-      - id: transform-data
-        name: Transform data
-        expression: |
-          // Validate and transform the data you've received...
-          fn(state => {
-            console.log("Do some data transformation here");
-            state.webhookResponse = {status: 200, body: state.data};
-            return state;
-          })
-        adaptor: '@openfn/language-common@latest'
-        openfn:
-          uuid: a43989a3-1d95-465f-b173-56e889d39d6f
-        next:
-          http:
-            disabled: false
-            condition: on_job_success
-            openfn:
-              uuid: 02640022-8421-4fe4-afb8-df97eec0d47d
-      - id: webhook
-        type: webhook
-        webhook_reply: after_completion
-        webhook_response_config: {}
-        openfn:
-          enabled: false
-          uuid: 1cffa41d-56cb-473d-b35a-5ea5652b2aa0
-        next:
-          transform-data:
-            disabled: false
-            condition: always
-            openfn:
-              uuid: 6b60016d-e93b-497d-b524-7232753d9faf
-    history:
-      - cli:425db74cfa89
-    openfn:
-      uuid: df018302-ff4c-4f16-b828-32216e496de0
-      inserted_at: 2026-10-06T08:05:11Z
-      updated_at: 2026-10-06T08:05:11Z
-      lock_version: 1
-    id: event-based-workflow
-    start: webhook
-  - name: Fetch Google Sheet Data
-    steps:
-      - id: cron
-        type: cron
-        cron_expression: '*/1 * * * *'
-        openfn:
-          enabled: false
-          uuid: ada660d4-d620-47dc-9630-b2a18d95b474
-        next:
-          get-data:
-            disabled: false
-            condition: always
-            openfn:
-              uuid: 1ab6899b-a3fe-4fd3-9070-2ba45c57ffe5
-      - id: get-data
-        name: Get data
-        expression: >
-          // Read data from the Google Sheet
-
-          getValues('17xd3lmxlup-bxVS-U6agvD6L7UQm6DzEsU43Iw2Fas4',
-          'Sheet1!A:Z');
-
-
-          // Convert the rows into JSON objects (first row = headers)
-
-          fn(state => {
-            const [headers, ...rows] = state.data.values;
-            const json = rows.map(row => {
-              return headers.reduce((obj, key, i) => {
-                obj[key] = row[i];
-                return obj;
-              }, {});
-            });
-
-            return { ...state, data: json };
-          });
-        adaptor: '@openfn/language-googlesheets@5.1.1'
-        openfn:
-          uuid: 57c7b7df-4869-41d8-971a-9fcf4ef95e7c
-    history:
-      - cli:abaa91539a0a
-    openfn:
-      uuid: 65088d55-259d-4011-a51f-293b2ddf18aa
-      inserted_at: 2026-10-06T08:05:11Z
-      updated_at: 2026-10-06T08:05:11Z
-      lock_version: 1
-    id: fetch-google-sheet-data
-    start: cron
-  - name: Sample Workflow
+  - name: Sample Workflow (renamed)
     steps:
       - id: job-1-check-if-age-is-over-18-months
         name: Job 1 - Check if age is over 18 months
@@ -210,13 +98,118 @@ workflows:
               uuid: c1e163f9-b41d-43ff-820a-81f2e82f5cc5
     history:
       - cli:c97e76bc9437
+      - cli:68896382e443
     openfn:
       uuid: e7b3d632-5e7d-4209-b3c0-6f1b97a423aa
       inserted_at: 2026-10-06T08:05:11Z
-      updated_at: 2026-10-06T08:05:11Z
-      lock_version: 1
-    id: sample-workflow
+      lock_version: 2
+      updated_at: 2026-10-14T17:10:49Z
+    id: sample-workflow-renamed
     start: webhook
+  - name: Event-based workflow
+    steps:
+      - id: http
+        name: Http
+        expression: |-
+          // Check out the Job Writing Guide for help getting started:
+          // https://docs.openfn.org/documentation/jobs/job-writing-
+
+          fn(state => {
+            console.log("is this logged?");
+            b = a * 10;
+            return state.data.x * 4;
+            });
+        adaptor: '@openfn/language-http@7.3.1'
+        openfn:
+          uuid: 419001ff-a02b-47ce-a38e-29129d12035d
+      - id: transform-data
+        name: Transform data
+        expression: |
+          // Validate and transform the data you've received...
+          fn(state => {
+            console.log("Do some data transformation here");
+            state.webhookResponse = {status: 200, body: state.data};
+            return state;
+          })
+        adaptor: '@openfn/language-common@latest'
+        openfn:
+          uuid: a43989a3-1d95-465f-b173-56e889d39d6f
+        next:
+          http:
+            disabled: false
+            condition: on_job_success
+            openfn:
+              uuid: 02640022-8421-4fe4-afb8-df97eec0d47d
+      - id: webhook
+        type: webhook
+        webhook_reply: after_completion
+        webhook_response_config: {}
+        openfn:
+          enabled: false
+          uuid: 1cffa41d-56cb-473d-b35a-5ea5652b2aa0
+        next:
+          transform-data:
+            disabled: false
+            condition: always
+            openfn:
+              uuid: 6b60016d-e93b-497d-b524-7232753d9faf
+    history:
+      - cli:425db74cfa89
+    openfn:
+      uuid: df018302-ff4c-4f16-b828-32216e496de0
+      inserted_at: 2026-10-06T08:05:11Z
+      lock_version: 1
+      updated_at: 2026-10-06T08:05:11Z
+    id: event-based-workflow
+    start: webhook
+  - name: Fetch Google Sheet Data
+    steps:
+      - id: cron
+        type: cron
+        cron_expression: '*/1 * * * *'
+        openfn:
+          enabled: false
+          uuid: ada660d4-d620-47dc-9630-b2a18d95b474
+        next:
+          get-data:
+            disabled: false
+            condition: always
+            openfn:
+              uuid: 1ab6899b-a3fe-4fd3-9070-2ba45c57ffe5
+      - id: get-data
+        name: Get data
+        expression: >
+          // Read data from the Google Sheet
+
+          getValues('17xd3lmxlup-bxVS-U6agvD6L7UQm6DzEsU43Iw2Fas4',
+          'Sheet1!A:Z');
+
+
+          // Convert the rows into JSON objects (first row = headers)
+
+          fn(state => {
+            const [headers, ...rows] = state.data.values;
+            const json = rows.map(row => {
+              return headers.reduce((obj, key, i) => {
+                obj[key] = row[i];
+                return obj;
+              }, {});
+            });
+
+            return { ...state, data: json };
+          });
+        adaptor: '@openfn/language-googlesheets@5.1.1'
+        openfn:
+          uuid: 57c7b7df-4869-41d8-971a-9fcf4ef95e7c
+    history:
+      - cli:abaa91539a0a
+    openfn:
+      uuid: 65088d55-259d-4011-a51f-293b2ddf18aa
+      inserted_at: 2026-10-06T08:05:11Z
+      lock_version: 1
+      updated_at: 2026-10-06T08:05:11Z
+    id: fetch-google-sheet-data
+    start: cron
   - name: Scheduled workflow
     steps:
       - id: cron
@@ -245,8 +238,8 @@ workflows:
     openfn:
       uuid: 86fddde1-685b-4b4f-ab16-2bef5878b862
       inserted_at: 2026-10-06T08:05:11Z
-      updated_at: 2026-10-06T08:05:11Z
       lock_version: 1
+      updated_at: 2026-10-06T08:05:11Z
     id: scheduled-workflow
     start: cron
   - name: OpenHIE Workflow
@@ -313,8 +306,8 @@ workflows:
     openfn:
       uuid: 1072af58-af2b-41e4-8ac1-54094f4d0eba
       inserted_at: 2026-10-13T09:07:27Z
-      updated_at: 2026-10-13T09:07:27Z
       lock_version: 1
+      updated_at: 2026-10-13T09:07:27Z
     id: openhie-workflow
     start: webhook
   - name: Sync test
@@ -347,7 +340,7 @@ workflows:
     openfn:
       uuid: 16969b53-c60b-438e-8a78-3bdc2f30e2b5
       inserted_at: 2026-10-14T14:31:59Z
-      updated_at: 2026-10-14T14:31:59Z
       lock_version: 1
+      updated_at: 2026-10-14T14:31:59Z
     id: sync-test
     start: webhook
