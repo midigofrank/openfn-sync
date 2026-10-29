@@ -6,13 +6,13 @@ channels:
   - enabled: true
     id: dfe79df7-41e3-49d3-ac95-5b03b2b3bea5
     name: Second Channel
-    destination_credential_id: null
     destination_url: https://example.com/second-v2
+    destination_credential_id: null
   - enabled: true
     id: 27c1d66e-6ebc-4447-9389-9102ed9753c6
     name: test-channel
-    destination_credential_id: null
     destination_url: https://example.com/hook3
+    destination_credential_id: null
 credentials: []
 openfn:
   uuid: 8f7bca29-8a96-423b-854d-5d036d48588e
@@ -20,9 +20,9 @@ openfn:
   inserted_at: 2026-10-06T08:05:11Z
   updated_at: 2026-10-14T17:10:49Z
 options:
+  retention_policy: retain_all
   allow_support_access: false
   requires_mfa: false
-  retention_policy: retain_all
 workflows:
   - name: Sample Workflow (renamed)
     steps:
@@ -31,7 +31,7 @@ workflows:
         expression: |2
             fn(state => {
               console.log(state);
-
+              
               if (state.data.age_in_months > 18) {
                 console.log('Eligible for program.');
                 return state;
@@ -102,8 +102,8 @@ workflows:
     openfn:
       uuid: e7b3d632-5e7d-4209-b3c0-6f1b97a423aa
       inserted_at: 2026-10-06T08:05:11Z
-      lock_version: 2
       updated_at: 2026-10-14T17:10:49Z
+      lock_version: 2
     id: sample-workflow-renamed
     start: webhook
   - name: Event-based workflow
@@ -158,8 +158,8 @@ workflows:
     openfn:
       uuid: df018302-ff4c-4f16-b828-32216e496de0
       inserted_at: 2026-10-06T08:05:11Z
-      lock_version: 1
       updated_at: 2026-10-06T08:05:11Z
+      lock_version: 1
     id: event-based-workflow
     start: webhook
   - name: Fetch Google Sheet Data
@@ -206,8 +206,8 @@ workflows:
     openfn:
       uuid: 65088d55-259d-4011-a51f-293b2ddf18aa
       inserted_at: 2026-10-06T08:05:11Z
-      lock_version: 1
       updated_at: 2026-10-06T08:05:11Z
+      lock_version: 1
     id: fetch-google-sheet-data
     start: cron
   - name: Scheduled workflow
@@ -238,8 +238,8 @@ workflows:
     openfn:
       uuid: 86fddde1-685b-4b4f-ab16-2bef5878b862
       inserted_at: 2026-10-06T08:05:11Z
-      lock_version: 1
       updated_at: 2026-10-06T08:05:11Z
+      lock_version: 1
     id: scheduled-workflow
     start: cron
   - name: OpenHIE Workflow
@@ -306,8 +306,8 @@ workflows:
     openfn:
       uuid: 1072af58-af2b-41e4-8ac1-54094f4d0eba
       inserted_at: 2026-10-13T09:07:27Z
-      lock_version: 1
       updated_at: 2026-10-13T09:07:27Z
+      lock_version: 1
     id: openhie-workflow
     start: webhook
   - name: Sync test
@@ -340,7 +340,7 @@ workflows:
     openfn:
       uuid: 16969b53-c60b-438e-8a78-3bdc2f30e2b5
       inserted_at: 2026-10-14T14:31:59Z
-      lock_version: 1
       updated_at: 2026-10-14T14:31:59Z
+      lock_version: 1
     id: sync-test
     start: webhook
