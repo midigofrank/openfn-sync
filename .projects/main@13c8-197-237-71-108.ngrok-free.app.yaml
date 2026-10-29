@@ -6,13 +6,13 @@ channels:
   - enabled: true
     id: dfe79df7-41e3-49d3-ac95-5b03b2b3bea5
     name: Second Channel
-    destination_url: https://example.com/second-v2
     destination_credential_id: null
+    destination_url: https://example.com/second-v2
   - enabled: true
     id: 27c1d66e-6ebc-4447-9389-9102ed9753c6
     name: test-channel
-    destination_url: https://example.com/hook3
     destination_credential_id: null
+    destination_url: https://example.com/hook3
 credentials: []
 openfn:
   uuid: 8f7bca29-8a96-423b-854d-5d036d48588e
@@ -20,9 +20,9 @@ openfn:
   inserted_at: 2026-10-06T08:05:11Z
   updated_at: 2026-10-14T17:10:49Z
 options:
-  retention_policy: retain_all
   allow_support_access: false
   requires_mfa: false
+  retention_policy: retain_all
 workflows:
   - name: Sample Workflow (renamed)
     steps:
