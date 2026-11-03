@@ -1,5 +1,5 @@
 alias: main
-endpoint: https://13c8-197-237-71-108.ngrok-free.app
+endpoint: https://be4c-197-237-71-108.ngrok-free.app
 forked_from:
   event-based-workflow: cli:425db74cfa89
   fetch-google-sheet-data: cli:abaa91539a0a

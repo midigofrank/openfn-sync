@@ -1,5 +1,5 @@
 alias: openhie
-endpoint: https://e4b0-197-237-71-108.ngrok-free.app
+endpoint: https://be4c-197-237-71-108.ngrok-free.app
 forked_from:
   openhie-workflow: cli:cf4068b53bac
 id: openhie-project
