@@ -7,4 +7,7 @@ channels:
     name: test-channel
     destination_url: https://example.com/hook3
     enabled: true
-collections: {}
+collections:
+  example: {}
+  another: {}
+  dummy: {}
